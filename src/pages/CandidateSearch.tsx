@@ -36,8 +36,21 @@ const CandidateSearch = () => {
           return userData;
         })
       );
+
+      const appendMessage = [
+        ...candidateDetails, 
+        {
+          name: 'No more candidates available',
+          username: '',
+          location: '',
+          avatar_url: '',
+          email: '',
+          html_url: '',
+          company: '',
+        }];
+
       console.log('Candidate details fetched:', candidateDetails);
-      setCandidate(candidateDetails);
+      setCandidate(appendMessage);
       } catch (err) {
         console.log('Error fetching candidate details:', err);
       }
@@ -48,24 +61,29 @@ const CandidateSearch = () => {
     }
   }, [logins]);
 
-const handleSaveCandidate = (candidate: Candidate) => {
-  const savedCandidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
-  savedCandidates.push(candidate);
-  localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
-  handleNextCandidate();
-}
+  const handleSaveCandidate = (candidate: Candidate) => {
+    const savedCandidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
+    savedCandidates.push(candidate);
+    localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
+    handleNextCandidate();
+  }
 
-const handleNextCandidate = () => {
-  setCurrentIndex((prevIndex) => (prevIndex + 1) % candidate.length);
-};
+  const handleNextCandidate = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % candidate.length);
+  };
 
-const currentCandidate = candidate[currentIndex];
+  const currentCandidate = candidate[currentIndex];
 
   return (
     <div>
       <h1>Candidate Search</h1>
       {currentCandidate ? (
-        <div>
+        currentCandidate.name === 'No more candidates available' ? (
+        <div> 
+          <h2>No more candidates available</h2>
+        </div>  
+        ) : (
+        <div className="card">
           <img src={currentCandidate.avatar_url} alt={currentCandidate.name} />
           <h3>Name: {currentCandidate.name}</h3>
           <p>Username: {currentCandidate.username}</p>
@@ -73,11 +91,12 @@ const currentCandidate = candidate[currentIndex];
           <p>Email: {currentCandidate.email}</p>
           <p>Company: {currentCandidate.company}</p>
           <a href={currentCandidate.html_url}>GitHub Profile</a>
-          <div>
-            <button onClick={() => handleSaveCandidate(currentCandidate)}>+</button>
+          <div className="buttons">
             <button onClick={handleNextCandidate}>-</button>
+            <button onClick={() => handleSaveCandidate(currentCandidate)}>+</button>
           </div>
         </div>
+        )
       ) : (
         <p>Loading...</p>
       )}

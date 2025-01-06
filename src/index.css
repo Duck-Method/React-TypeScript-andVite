@@ -45,7 +45,7 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 3px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -108,6 +108,7 @@ tbody tr:nth-child(odd) {
 .nav-link {
   color: #fff;
   text-decoration: none;
+  margin: 0px 10px;
 }
 
 .active {
@@ -117,4 +118,22 @@ tbody tr:nth-child(odd) {
 .table {
   width: 80vw;
   table-layout: fixed;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.card {
+  background-color: #333333;
+  color: white;
+  border-radius: 30px;
+  padding: 10px;
+  margin: 10px;
+}
+.card img {
+  max-width: 100%;
+  border-radius: 10px;
 }
