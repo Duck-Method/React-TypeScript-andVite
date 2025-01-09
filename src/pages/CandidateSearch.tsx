@@ -4,10 +4,12 @@ import { Candidate } from '../interfaces/Candidate.interface.tsx';
 
 
 const CandidateSearch = () => {
+  // useStates allow for the data to be stored and manipulated in the component
   const [candidate, setCandidate] = useState<Candidate[]>([]);
   const [logins, setLogins] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+  // fetches the candidate login from the github api
   useEffect(() => {
     console.log('useEffect called');
     async function fetchCandidate() {
@@ -26,6 +28,7 @@ const CandidateSearch = () => {
     console.log('Call made');
   }, []);
 
+  // fetches the candidate details using the login from the github api
   useEffect (() => {
     console.log('useEffect #2 called');
     const fetchCandidateDetails = async () => {
@@ -61,6 +64,7 @@ const CandidateSearch = () => {
     }
   }, [logins]);
 
+  // saves the candidate to the local storage
   const handleSaveCandidate = (candidate: Candidate) => {
     const savedCandidates = JSON.parse(localStorage.getItem('savedCandidates') || '[]');
     savedCandidates.push(candidate);
@@ -79,23 +83,25 @@ const CandidateSearch = () => {
       <h1>Candidate Search</h1>
       {currentCandidate ? (
         currentCandidate.name === 'No more candidates available' ? (
-        <div> 
+        <div className="cardEnd" > 
           <h2>No more candidates available</h2>
         </div>  
         ) : (
+        <>  
         <div className="card">
           <img src={currentCandidate.avatar_url} alt={currentCandidate.name} />
-          <h3>Name: {currentCandidate.name}</h3>
+          <h2>Name: {currentCandidate.name}</h2>
           <p>Username: {currentCandidate.username}</p>
           <p>Location: {currentCandidate.location}</p>
           <p>Email: {currentCandidate.email}</p>
           <p>Company: {currentCandidate.company}</p>
           <a href={currentCandidate.html_url}>GitHub Profile</a>
-          <div className="buttons">
-            <button onClick={handleNextCandidate}>-</button>
-            <button onClick={() => handleSaveCandidate(currentCandidate)}>+</button>
           </div>
-        </div>
+          <div className="buttons">
+            <button className="buttonRed" onClick={handleNextCandidate}>-</button>
+            <button className="buttonGreen" onClick={() => handleSaveCandidate(currentCandidate)}>+</button>
+          </div>
+        </>
         )
       ) : (
         <p>Loading...</p>

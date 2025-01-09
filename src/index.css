@@ -41,14 +41,22 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: center;
+}
+
+
+ul {
+  /* this is changed to 0 to make the layout work with the function of populating the saved candidate page */
+  padding: 0px;
+  margin: 0px;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 25px;
   border: 3px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 900;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
@@ -91,7 +99,7 @@ tr {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #333333;
+  background-color: #000000;
 }
 
 .nav {
@@ -120,20 +128,75 @@ tbody tr:nth-child(odd) {
   table-layout: fixed;
 }
 
+/* this starts the css for the candidate search page */
+
 .buttons {
   display: flex;
   justify-content: space-between;
   margin: 10px;
 }
 
+.buttonRed {
+  background-color: #d10000;
+  color: black;
+}
+
+.buttonGreen {
+  background-color: #009100;
+  color: black;
+}
+
 .card {
-  background-color: #333333;
+  background-color: #000000;
   color: white;
   border-radius: 30px;
-  padding: 10px;
-  margin: 10px;
+  padding: 3px;
+  width: 415px;
 }
+
+.cardEnd {
+  background-color: #000000;
+  color: white;
+  border-radius: 30px;
+  padding: 3px;
+  text-align: center;
+}
+
 .card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px 30px 0px 0px;
+  object-fit: scale-down;
+}
+
+/* this starts the css for the saved candidates page */
+
+.cardSavedTable {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.cardSavedTable p {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+.cardSavedLayout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: #000;
+  width: 150px;
+  margin: 3px;
+  font-weight: 500;
+  word-break: break-word;
+  text-align: left;
+}
+
+.cardSavedLayout img {
   max-width: 100%;
   border-radius: 10px;
 }
